@@ -1,19 +1,24 @@
 package com.example.oauth2study.config;
 
 import com.example.oauth2study.user.model.Role;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
-@RequiredArgsConstructor
 public class SpringSecurityConfig {
 
+    private final CustomOauth2UserService customOauth2UserService;
+
+    public SpringSecurityConfig(CustomOauth2UserService customOauth2UserService) {
+        this.customOauth2UserService = customOauth2UserService;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -35,7 +40,10 @@ public class SpringSecurityConfig {
                     .baseUri("/oauth2/authorization") //로그인페이지를 받기위한 서버의 엔드포인트 설정
                 .and()
                     .redirectionEndpoint()
-                    .baseUri("/*/oauth2/code/*");
+                    .baseUri("/*/oauth2/code/*")
+                .and()
+                    .userInfoEndpoint()
+                    .userService(customOauth2UserService);
         return http.build();
     }
 }
