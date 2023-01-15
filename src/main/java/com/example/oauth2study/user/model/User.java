@@ -32,9 +32,11 @@ public class User extends BaseTimeEntity{
     @Column(nullable = false)
     private ProviderType provider;
 
-
     @Column(nullable = false,unique = true)
     private String providerId;
+
+    @Column(unique = true)
+    private String refreshToken;
 
     @Builder
     public User(String password, String name, String email, Role role, ProviderType provider, String providerId) {
@@ -48,6 +50,10 @@ public class User extends BaseTimeEntity{
     public User update(String name){
         this.name = name;
         return this;
+    }
+
+    public void assignRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
     }
 
     public String getRoleKey(){
