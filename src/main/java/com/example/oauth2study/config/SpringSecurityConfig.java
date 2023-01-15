@@ -41,6 +41,9 @@ public class SpringSecurityConfig {
                     .antMatchers("/api/**/admin/**").hasAnyAuthority(Role.ADMIN.getKey())
                     .anyRequest().authenticated()
                 .and()
+                    .logout()
+                    .logoutSuccessUrl("/")
+                .and()
                     .oauth2Login()
                     .authorizationEndpoint()
                     .baseUri("/oauth2/authorization") //로그인페이지를 받기위한 서버의 엔드포인트 설정
