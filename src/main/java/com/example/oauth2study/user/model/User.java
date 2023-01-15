@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Table(name = "users")
 public class User extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -26,7 +27,6 @@ public class User extends BaseTimeEntity{
     private Role role;
 
     @Builder
-
     public User(String name, String email, Role role) {
         this.name = name;
         this.email = email;
