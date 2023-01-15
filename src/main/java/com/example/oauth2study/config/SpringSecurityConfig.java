@@ -55,8 +55,4 @@ public class SpringSecurityConfig {
                     .userService(customOauth2UserService);
         return http.build();
     }
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
 }
