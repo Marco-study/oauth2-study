@@ -1,5 +1,6 @@
 package com.example.oauth2study.config;
 
+import com.example.oauth2study.auth.CustomOauth2UserService;
 import com.example.oauth2study.user.model.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,9 @@ public class SpringSecurityConfig {
         http
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //세션을 쓰지 않고 jwt 방식으로 하겠다.
+                .and()
+                    .headers()
+                    .frameOptions().disable()
                 .and()
                     .csrf().disable() //jwt 방식을 쓰면 불필요함
                     .formLogin().disable() //jwt 로그인을하기때문에 안씀
