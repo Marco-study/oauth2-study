@@ -29,11 +29,11 @@ public class JwtTokenProvider {
     private Key refreshKey;
 
     public JwtTokenProvider(@Value("${jwt.time.access}") long jwt_access_token_exptime,
-                            @Value("${jwt.time.refresh}") long jwt_refreash_token_exptime,
+                            @Value("${jwt.time.refresh}") long jwt_refresh_token_exptime,
                             @Value("${jwt.secret.access}") String jwt_access_secret_key,
                             @Value("${jwt.secret.refresh}") String jwt_refresh_secret_key) {
         JWT_ACCESS_TOKEN_EXPTIME = jwt_access_token_exptime;
-        JWT_REFREASH_TOKEN_EXPTIME = jwt_refreash_token_exptime;
+        JWT_REFREASH_TOKEN_EXPTIME = jwt_refresh_token_exptime;
         JWT_ACCESS_SECRET_KEY = jwt_access_secret_key;
         JWT_REFRESH_SECRET_KEY = jwt_refresh_secret_key;
     }
